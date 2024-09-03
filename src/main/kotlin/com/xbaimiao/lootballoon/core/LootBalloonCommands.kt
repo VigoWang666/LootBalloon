@@ -9,7 +9,7 @@ import com.xbaimiao.lootballoon.LootBalloon
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
-@ECommandHeader("lootballoon")
+@ECommandHeader("lootballoon", debug = true)
 object LootBalloonCommands {
 
     private val balloonArgNode = ArgNode("气球名称", exec = { token ->

@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.xbaimiao.lootballoon"
-version = "1.0.4"
+version = "1.0.5"
 
 repositories {
     mavenLocal()
@@ -20,7 +20,7 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation("com.xbaimiao:EasyLib:3.2.3")
-    implementation("de.tr7zw:item-nbt-api:2.12.0")
+    implementation("de.tr7zw:item-nbt-api:2.13.2")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
 
     implementation("com.zaxxer:HikariCP:4.0.3")

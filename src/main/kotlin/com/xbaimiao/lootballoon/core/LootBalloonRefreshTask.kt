@@ -10,7 +10,7 @@ object LootBalloonRefreshTask {
         launchCoroutine {
             while (true) {
                 for (onlinePlayer in onlinePlayers()) {
-                    a@ for (balloon in LootBalloon.inst.balloonList) {
+                    a@ for (balloon in LootBalloon.inst.balloonList.toList()) {
                         if (balloon.refresh(onlinePlayer)) {
                             break@a
                         } else {

@@ -4,10 +4,7 @@ import com.xbaimiao.easylib.bridge.player.parseToESound
 import com.xbaimiao.easylib.chat.TellrawJson
 import com.xbaimiao.easylib.chat.colored
 import com.xbaimiao.easylib.skedule.launchCoroutine
-import com.xbaimiao.easylib.util.getOrNull
-import com.xbaimiao.easylib.util.plugin
-import com.xbaimiao.easylib.util.submit
-import com.xbaimiao.easylib.util.warn
+import com.xbaimiao.easylib.util.*
 import com.xbaimiao.lootballoon.LootBalloon
 import de.tr7zw.changeme.nbtapi.NBTContainer
 import de.tr7zw.changeme.nbtapi.NBTItem
@@ -60,23 +57,28 @@ class Balloon(
             val max = async {
                 LootBalloon.inst.database.getTodayCount(player.name, this@Balloon) >= maxAmountPerPlayer
             }
+            debug("max: $max maxAmountPerPlayer: $maxAmountPerPlayer")
             if (max) {
                 it.resume(false)
                 return@launchCoroutine
             }
             if (player.world.name in worlds) {
+                debug("玩家在黑名单世界")
                 it.resume(false)
                 return@launchCoroutine
             }
             if (Math.random() > probability) {
+                debug("概率不成立")
                 it.resume(false)
                 return@launchCoroutine
             }
             val now = LocalTime.now()
             if (now !in time.first..time.second) {
+                debug("不在刷新时间内")
                 it.resume(false)
                 return@launchCoroutine
             }
+            debug("生成成功  位置 ${player.location.clone().also { it.y += height }}")
             summon(player.location.clone().also { it.y += height })
             async {
                 LootBalloon.inst.database.addTodayCount(player.name, this@Balloon)
